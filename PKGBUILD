@@ -1,6 +1,6 @@
 pkgname=qemu
 pkgver=5.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc='QEMU is a generic and open source machine emulator and virtualizer.'
 arch=('x86_64')
 url='https://www.qemu.org/'
@@ -15,12 +15,12 @@ src_name="qemu-${pkgver}"
 build() {
     cd "${src_name}"
 
-    ./configure
+    ./configure --target-list=x86_64-softmmu
     cd build
     make -j$(nproc)
 }
 
 package() {
     cd "${src_name}"
-    make install
+    make DESTDIR=${pkgdir} install
 }
