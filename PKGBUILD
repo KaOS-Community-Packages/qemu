@@ -24,3 +24,4 @@ package() {
     cd "${src_name}"
     make DESTDIR=${pkgdir} install
 }
+
