@@ -1,10 +1,10 @@
 pkgname=qemu
 pkgver=8.2.0
 pkgrel=1
-pkgdesc='QEMU is a generic and open source machine emulator and virtualizer.'
+pkgdesc='A generic and open source machine emulator and virtualizer.'
 arch=('x86_64')
 url='https://www.qemu.org/'
-license=('GPLv2')
+license=('GPL-2')
 depends=('glib2' 'pixman' 'zlib' 'libaio' 'libnfs' 'libseccomp' 'libcap-ng' 'libxkbcommon' 'zstd' 'curl' 'ncurses' 'libssh' 'bzip2' 'libepoxy' 'gnutls' 'gmp' 'gtk3' 'libx11' 'libpng' 'libjpeg-turbo' 'libsasl' 'pam' 'lzo2' 'libusb' 'libtasn1' 'keyutils' 'fuse3' 'elfutils')
 makedepends=('ninja')
 source=("https://download.qemu.org/qemu-${pkgver}.tar.xz")
@@ -22,4 +22,6 @@ build() {
 package() {
     cd "${src_name}"
     make DESTDIR=${pkgdir} install
+    # not sure why this gets created but it messes with things
+    rm -rf "${pkgdir}/var"
 }
